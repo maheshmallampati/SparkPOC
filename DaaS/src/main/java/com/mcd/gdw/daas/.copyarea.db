@@ -1,0 +1,9 @@
+ClearCase CopyAreaDB|4
+GDW_Code\Source_Code\Java\DaaS\src\main\java\com\mcd\gdw\daas
+2
+5
+4:util|2|0|0|0|d92ff870f8054b96bb8d3bd88d8225cd|0
+6:driver|2|0|0|0|ab6b56ff2ecd4f5ebe2e7b1c43c17067|0
+9:mapreduce|2|0|0|0|e43af930ef3c4d5eb7137bb44bf7e2e6|0
+12:DaaSConstants.java|1|153a558966a|acf|1f869e4|7e8d398a807241fe97cb3c195c38cacb|1
+4:abac|2|0|0|0|9a85a73f40b745df97230dd1ed02f7e0|0

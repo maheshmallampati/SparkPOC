@@ -1,0 +1,216 @@
+<workflow-app xmlns="uri:oozie:workflow:0.3" name="daasprocess">
+	<start to="tdaextractfromstld"/>
+	<action name="mergetofinal">
+                <java>
+                        <job-tracker>${jobTracker}</job-tracker>
+                        <name-node>${nameNode}</name-node>
+                        <configuration>
+                                <property>
+                                        <name>mapred.job.queue.name</name>
+                                        <value>${queueName}</value>
+                                </property>
+				<property>
+					<name>mapred.job.name</name>
+					<value>mergetofinal</value>
+				</property>
+                        </configuration>
+                        <main-class>com.mcd.gdw.daas.driver.MergeToFinal</main-class>
+			<arg>-c</arg>
+			<arg>${CONFIG_XML}</arg>
+			<arg>-t</arg>
+			<arg>${FILE_TYPE}</arg>
+                </java>
+
+                <ok to="asterextractfromstld"/>
+                <error to="fail"/>
+        </action>
+
+	<action name="asterextractfromstld">
+                <java>
+                        <job-tracker>${jobTracker}</job-tracker>
+                        <name-node>${nameNode}</name-node>
+                        <configuration>
+                                <property>
+                                        <name>mapred.job.queue.name</name>
+                                        <value>${queueName}</value>
+                                </property>
+                                <property>
+                                        <name>mapred.job.name</name>
+                                        <value>Processing MapReduce Aster Extract</value>
+                                </property>
+                        </configuration>
+                        <main-class>com.mcd.gdw.daas.driver.GenerateAsterFormat</main-class>
+                        <arg>-c</arg>
+                        <arg>${CONFIG_XML}</arg>
+                        <arg>-t</arg>
+                        <arg>${FILE_TYPE}</arg>
+			<arg>-d</arg>
+			<arg>${TERRDATE}</arg>
+			<arg>-owshfltr</arg>
+			<arg>${OWNERSHIP_FILTER}</arg>
+                </java>
+
+                <ok to="tdaextractfromstld"/>
+                <error to="fail"/>
+        </action>
+
+	<action name="tdaextractfromstld">
+                <java>
+                        <job-tracker>${jobTracker}</job-tracker>
+                        <name-node>${nameNode}</name-node>
+                        <configuration>
+                                <property>
+                                        <name>mapred.job.queue.name</name>
+                                        <value>${queueName}</value>
+                                </property>
+                                <property>
+                                        <name>mapred.job.name</name>
+                                        <value>mergetofinal</value>
+                                </property>
+                        </configuration>
+                        <main-class>com.mcd.gdw.daas.driver.GenerateTdaFormatStld</main-class>
+                        <arg>-r</arg>
+                        <arg>${TDA_EXTRACT_STLD_INPUT_PATH}</arg>
+                        <arg>-o</arg>
+                        <arg>${TDA_EXTRACT_OUTPUTPATH}</arg>
+			<arg>-dc</arg>
+			<arg>${TDA_EXTRACT_CACHEFILES}</arg>
+                        <arg>-p</arg>
+		        <arg>replace.itemcode:true</arg>
+			<arg>-c</arg>
+			<arg>${CONFIG_XML}</arg>
+			<arg>-t</arg>
+			<arg>${FILE_TYPE}</arg>
+			<arg>-owshfltr</arg>
+			<arg>${OWNERSHIP_FILTER}</arg>
+                </java>
+
+                <ok to="tdaextractfromsos"/>
+                <error to="fail"/>
+        </action>
+
+ 	<action name="tdaextractfromsos">
+                <java>
+                        <job-tracker>${jobTracker}</job-tracker>
+                        <name-node>${nameNode}</name-node>
+                        <configuration>
+                                <property>
+                                        <name>mapred.job.queue.name</name>
+                                        <value>${queueName}</value>
+                                </property>
+                                <property>
+                                        <name>mapred.job.name</name>
+                                        <value>mergetofinal</value>
+                                </property>
+                        </configuration>
+                        <main-class>com.mcd.gdw.daas.driver.GenerateTdaFormatSos</main-class>
+                        <arg>-r</arg>
+                        <arg>${TDA_EXTRACT_SOS_INPUT_PATH}</arg>
+                        <arg>-o</arg>
+                        <arg>${SOS_EXTRACT_OUTPUTPATH}</arg>
+                        <arg>-dc</arg>
+                        <arg>${SOS_EXTRACT_CACHEFILES}</arg>
+			<arg>-c</arg>
+                        <arg>${CONFIG_XML}</arg>
+                        <arg>-t</arg>
+                        <arg>${FILE_TYPE}</arg>
+			<arg>-owshfltr</arg>
+                        <arg>${OWNERSHIP_FILTER}</arg>
+		 </java>
+
+                <ok to="tdajoinstldsos"/>
+                <error to="fail"/>
+        </action>
+	 <action name="tdajoinstldsos">
+                <java>
+                        <job-tracker>${jobTracker}</job-tracker>
+                        <name-node>${nameNode}</name-node>
+                        <configuration>
+                                <property>
+                                        <name>mapred.job.queue.name</name>
+                                        <value>${queueName}</value>
+                                </property>
+                                <property>
+                                        <name>mapred.job.name</name>
+                                        <value>tdajoinstldsos</value>
+                                </property>
+                        </configuration>
+                        <main-class>com.mcd.gdw.daas.driver.StldSosJoinDriver</main-class>
+                        <arg>${HDR_SOS_JOIN_INPUTPATH}</arg>
+                        <arg>${SALES_OUTPUTPATH}</arg>
+                        <arg>${NUM_OF_REDUCERS_FOR_HDRSOS_JOIN}</arg>
+                        <arg>${CONFIG_XML}</arg>
+                        <arg>${FILE_TYPE}</arg>
+                	<arg>${SALESANDPMIX_FINAL_DEST_PATH}</arg>
+		</java> 
+                
+                <ok to="pmixcombinefiles"/>
+                <error to="fail"/>
+        </action>
+ 	<action name="pmixcombinefiles">
+                <java>
+                        <job-tracker>${jobTracker}</job-tracker>
+                        <name-node>${nameNode}</name-node>
+                        <configuration>
+                                <property>
+                                        <name>mapred.job.queue.name</name>
+                                        <value>${queueName}</value>
+                                </property>
+                                <property>
+                                        <name>mapred.job.name</name>
+                                        <value>tdajoinstldsos</value>
+                                </property>
+                        </configuration>
+                        <main-class>com.mcd.gdw.daas.driver.PMIXMultiFileCombinerDriver</main-class>
+                        <arg>${PMIX_INPUTPATH}</arg>
+                        <arg>${PMIX_OUTPUTPATH}</arg>
+                        <arg>${CONFIG_XML}</arg>
+			<arg>${FILE_TYPE}</arg>
+			<arg>${NUM_REDUCERS_PMIX_COMBINER}</arg>
+			<arg>${SALESANDPMIX_FINAL_DEST_PATH}</arg> 
+                </java>
+		<ok to="extractdaypartpmix"/>
+                <error to="fail"/>
+	
+	</action>
+	<action name="extractdaypartpmix">
+	 <java>
+                        <job-tracker>${jobTracker}</job-tracker>
+                        <name-node>${nameNode}</name-node>
+                        <configuration>
+                                <property>
+                                        <name>mapred.job.queue.name</name>
+                                        <value>${queueName}</value>
+                                </property>
+                                <property>
+                                        <name>mapred.job.name</name>
+                                        <value>mergetofinal</value>
+                                </property>
+                        </configuration>
+                        <main-class>com.mcd.gdw.daas.driver.GenerateDaypartPMIXFromStld</main-class>
+			<arg>-r</arg>
+                        <arg>${TDA_EXTRACT_STLD_INPUT_PATH}/STLD*</arg>
+			<arg>-o</arg>
+                        <arg>${DAYPARTPMIX_OUTPUTPATH}</arg>
+                        <arg>-dc</arg>
+			<arg>${DAYPARTPMIX_EXTRACT_CACHEFILES}</arg>
+		 	<arg>-c</arg>
+                        <arg>${CONFIG_XML}</arg>
+                        <arg>-t</arg>
+                        <arg>${FILE_TYPE}</arg>
+			<arg>-owshfltr</arg>
+                        <arg>${OWNERSHIP_FILTER}</arg>
+		</java>
+
+                <ok to="end"/>
+                <error to="fail"/>
+        </action>
+
+	<kill name="fail">
+		<message>Map/Reduce failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+	</kill>
+	<end name="end"/>
+
+
+
+</workflow-app>

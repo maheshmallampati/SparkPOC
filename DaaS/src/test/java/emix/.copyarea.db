@@ -1,0 +1,8 @@
+ClearCase CopyAreaDB|4
+GDW_Code\Source_Code\Java\DaaS\src\test\java\emix
+2
+4
+19:STLDSaleMetricMapper.java|1|153a55895d0|af4d|91c07ace|09b59b2f515e4bf4882a3a865000e4c2|0
+1a:STLDSaleMetricReducer.java|1|153a55895c3|49ff|647b4c54|4ef554a5f55b429db9980fc878f6bbda|0
+12:STLDConstants.java|1|153a55895a4|590|2971c9f7|85f220129a9844ecb94f79f8afafcd1c|0
+19:STLDSaleMetricDriver.java|1|153a55895b8|1213|e8960a79|f01ddd9ef8f341d7a0a291404634ad98|0

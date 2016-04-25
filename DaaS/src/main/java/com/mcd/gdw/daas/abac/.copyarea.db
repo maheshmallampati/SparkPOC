@@ -1,0 +1,14 @@
+ClearCase CopyAreaDB|4
+GDW_Code\Source_Code\Java\DaaS\src\main\java\com\mcd\gdw\daas\abac
+2
+a
+11:ABaCListItem.java|1|153a558a28d|1a13|3fe984c|4582c85d80674883b3c738a32a436c9e|0
+11:ABaCDataType.java|1|153a558a2a3|cd9|b5650a41|8363b6c24964480792474600c0db4704|0
+11:ABaCRegister.java|1|153aa29696b|998e|c4720072|5cf64edc0a624949929d97dd83291971|1
+d:ABaCList.java|1|153a558a281|9bf|e2ccaab7|649ad8b4a2f74cd58695a6934361d615|0
+d:ABaCFile.java|1|153a558a2ba|ff0|2762108b|786dc463909148b1a00135ca8d81c67c|0
+9:ABaC.java|1|153a558a273|21a8d|95644a5e|3dc39be843ea4e399cacfe17a16aa05a|1
+14:ABaCListSubItem.java|1|153a558a299|ef4|7bf55a7d|08b812c5c7134906949a66306fed455e|0
+10:ABaCUtility.java|1|153aa2fcb2b|bd2c|b730a582|f4e378cbdcad404d897d3cfba8c5b815|1
+e:ABaCFiles.java|1|153a558a2c4|733|c2f01703|c3b15acab5a84357b131ca4c34c5aec7|0
+12:ABaCDataTypes.java|1|153a558a2af|6d0|21c72439|000bee99ecb44d4998f2158c2394910e|0

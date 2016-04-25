@@ -1,0 +1,120 @@
+package com.mcd.gdw.test.daas.mapreduce;
+
+import java.io.IOException;
+
+import org.apache.hadoop.fs.Path;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.NullWritable;
+import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapreduce.Mapper;
+import org.apache.hadoop.mapreduce.lib.input.FileSplit;
+
+public class FixGoldPart1Mapper extends Mapper<LongWritable, Text, NullWritable, Text> {
+	
+	private static final String SEPARATOR_CHAR = "\t";
+	
+	private Path splitPath;
+	private String fullFileName;
+	private int tabPos1;
+	private int tabPos2;
+	private int tabPos3;
+	private int tabPos4;
+	private int tabPos5;
+	private int tabPos6;
+	private String posBusnDt;
+	private String fileType;
+	private String fileId;
+	private String terrCd;
+	private String lgcyLclRfrDefCd;
+	private int rowNum;
+	
+	private StringBuffer textBuffer = new StringBuffer();
+
+	private Text valueText = new Text();
+	
+	@Override
+	public void setup(Context context) {
+
+		splitPath = ((FileSplit) context.getInputSplit()).getPath();
+    	fullFileName = splitPath.toString();
+    	rowNum = 0;
+	}
+
+	@Override
+	public void map(LongWritable key, Text value,Context context) throws IOException, InterruptedException {
+
+		rowNum++;
+		
+		tabPos1 = getNextTabPos(value,0);
+		tabPos2 = getNextTabPos(value,tabPos1+1);
+		tabPos3 = getNextTabPos(value,tabPos2+1);
+		tabPos4 = getNextTabPos(value,tabPos3+1);
+		tabPos5 = getNextTabPos(value,tabPos4+1);
+		tabPos6 = getNextTabPos(value,tabPos5+1);
+
+		if ( tabPos6 > 0 ) {
+			fileType = getTextSubString(value,0,tabPos1);
+			fileId = getTextSubString(value,tabPos2+1,tabPos3);
+			posBusnDt = getTextSubString(value,tabPos1+1,tabPos2);
+			terrCd = getTextSubString(value,tabPos4+1,tabPos5);
+			lgcyLclRfrDefCd = getTextSubString(value,tabPos5+1,tabPos6);
+			
+			textBuffer.setLength(0);
+			textBuffer.append(fileType);
+			textBuffer.append(SEPARATOR_CHAR);
+			textBuffer.append(terrCd);
+			textBuffer.append(SEPARATOR_CHAR);
+			textBuffer.append(lgcyLclRfrDefCd);
+			textBuffer.append(SEPARATOR_CHAR);
+			textBuffer.append(posBusnDt);
+			textBuffer.append(SEPARATOR_CHAR);
+			textBuffer.append(fileId);
+			textBuffer.append(SEPARATOR_CHAR);
+			textBuffer.append(fullFileName);
+			textBuffer.append(SEPARATOR_CHAR);
+			textBuffer.append(rowNum);
+			
+			valueText.clear();
+			valueText.set(textBuffer.toString());
+			
+			context.write(NullWritable.get(), valueText);
+		}	
+	}
+	
+	private int getNextTabPos(Text value
+			                 ,int strtPos) {
+
+		int retPos = strtPos;
+		int charValue;
+		
+		try {
+			
+			charValue = value.charAt(retPos);
+			
+			while ( charValue > -1 && charValue != '\t' ) {
+				retPos++;
+				charValue = value.charAt(retPos);
+			}
+			
+		} catch (Exception ex) {
+			retPos = -1;
+		}
+
+		return(retPos);
+	}
+	
+	private String getTextSubString(Text value
+			                       ,int strtPos
+			                       ,int endPos) {
+		
+		textBuffer.setLength(0);
+				
+		for ( int pos=strtPos; pos < endPos; pos++ ) {
+			textBuffer.append((char)value.charAt(pos));
+		}
+		
+		return(textBuffer.toString());
+		
+	}
+
+}

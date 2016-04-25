@@ -1,0 +1,12 @@
+ClearCase CopyAreaDB|4
+GDW_Code\Source_Code\Java\DaaS
+2
+8
+a:.classpath|1|153a5585dfc|25f|8c36ce2b|f4eb3d4883e047e988e68e073d15cca8|0
+3:src|2|0|0|0|c7f16d43fcea4e4181336cfcc8653301|0
+4:repo|2|0|0|0|841a714add884a6e8ddb79744511d091|0
+8:.project|1|153a5585e10|22c|d4c5b12c|45930be04c864ebf8949c95038809bf9|0
+7:pom.xml|1|153a5585e29|28ab|8bf084b0|fccacd7744e947e29833f8bfaaae7ea0|0
+1a:dependency-reduced-pom.xml|1|153a5585e3b|4bf|dcf961e6|8cfef91b11c249e798ad8709f208047a|0
+9:.settings|2|0|0|0|7a60b4b531a4411b81a274b955d77d3a|0
+6:target|2|0|0|0|01c49b8841214a91b92e9d1d8c1e063b|0
