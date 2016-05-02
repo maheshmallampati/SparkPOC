@@ -18,9 +18,9 @@ object DataHubUtil {
     new SparkConf().setAppName(jobName).setMaster(masters).set("spark.executor.memory", "1g")
   }
 
-  def getSchemaforDatahub():StructType= {
-    
-      val customDatahubSchema = StructType(Array(
+  def getSchemaforDatahub(): StructType = {
+
+    val customDatahubSchema = StructType(Array(
       StructField("posbusndt", StringType, true),
       StructField("pos_ord_key_id", StringType, true),
       StructField("lgcy_lcl_rfr_def_cd", StringType, true),
@@ -225,6 +225,26 @@ object DataHubUtil {
       StructField("last_updt_ts", StringType, true),
       StructField("terr_cd", StringType, true),
       StructField("pos_busn_dt", StringType, true)))
-      return customDatahubSchema;
+    return customDatahubSchema;
   }
+
+  def getSchemaforDyPt(): StructType = {
+    val customDyPtSchema = StructType(Array(
+      StructField("dypt_id_nu", StringType, true),
+      StructField("dypt_ds", StringType, true),
+      StructField("dypt_real_dy_seg_fl", StringType, true)))
+    return customDyPtSchema;
+  }
+  
+  
+  def getSchemaforOffrsIncList(): StructType = {
+    val customOffrsIncListSchema = StructType(Array(
+      StructField("terr_cd", StringType, true),
+      StructField("pos_rest_id", StringType, true),
+      StructField("eff_strt_dt", StringType, true),
+      StructField("eff_end_dt", StringType, true)))      
+      return customOffrsIncListSchema;
+  }
+  
+  
 }

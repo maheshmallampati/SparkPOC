@@ -1,1 +1,4 @@
  hive -e 'use daas;set hive.cli.print.header=true;select * from tld_datahub limit 0' > ./SparkDatahub.txt
+ 
+  hive -e 'use daas;set hive.cli.print.header=true;select * from dypt limit 0' > ./SparkDypt.txt
+  //dypt.dypt_id_nu dypt.dypt_ds    dypt.dypt_real_dy_seg_fl
