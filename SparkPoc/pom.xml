@@ -7,8 +7,32 @@
    <maven.compiler.source>1.8</maven.compiler.source>
    <maven.compiler.target>1.8</maven.compiler.target>
    <java.version>1.8</java.version>
+   <scala.binary.version>2.10</scala.binary.version>
     <!-- <scala.binary.version>2.11</scala.binary.version> -->
 </properties>
+<repositories>
+    <repository>
+      <id>Akka repository</id>
+      <url>http://repo.akka.io/releases</url>
+    </repository>
+    <repository>
+      <id>scala-tools</id>
+      <url>https://oss.sonatype.org/content/groups/scala-tools</url>
+    </repository>
+    <repository>
+      <id>apache</id>
+      <url>https://repository.apache.org/content/repositories/releases</url>
+    </repository>
+    <repository>
+      <id>twitter</id>
+      <url>http://maven.twttr.com/</url>
+    </repository>
+    <repository>
+      <id>central2</id>
+      <url>http://central.maven.org/maven2/</url>
+    </repository>
+  </repositories>
+  
 <dependencies>
 
 
@@ -24,6 +48,24 @@
 <version>1.6.0</version>
 
 </dependency>
+
+<!-- I was having problems with 2.7 version of Jackson only 2.4.4 worked which is weird -->
+  <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-core</artifactId>
+      <version>2.4.4</version>
+  </dependency>
+  <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-annotations</artifactId>
+      <version>2.4.4</version>
+  </dependency>
+  <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.4.4</version>
+  </dependency>  
+  
 
 <dependency>
 	<groupId>org.apache.spark</groupId>
