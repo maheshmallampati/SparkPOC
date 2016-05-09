@@ -1,4 +1,5 @@
-package com.mcd.json.parsing
+package com.mcd.sparksql.datahub
+
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.types.{ StructType, StructField, StringType, IntegerType }
 import org.apache.spark.SparkContext
@@ -18,6 +19,7 @@ import scala.collection.JavaConversions._
 import au.com.bytecode.opencsv.CSVReader
 import org.slf4j.LoggerFactory
 import org.apache.spark.rdd.RDD
+import com.mcd.json.parsing.Person
 
 /*
  * * 
@@ -26,7 +28,7 @@ import org.apache.spark.rdd.RDD
  * 
  * */
 
-object WholeJsonParsing {
+object RDDToDFJSONParsing {
   def main(args: Array[String]): Unit = {
 
     if (args.length < 2) {
