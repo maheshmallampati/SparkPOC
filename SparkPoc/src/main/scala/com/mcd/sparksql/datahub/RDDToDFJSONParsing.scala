@@ -20,6 +20,8 @@ import au.com.bytecode.opencsv.CSVReader
 import org.slf4j.LoggerFactory
 import org.apache.spark.rdd.RDD
 import com.mcd.json.parsing.Person
+import org.apache.spark.sql.hive.HiveContext
+
 
 /*
  * * 
@@ -41,7 +43,7 @@ object RDDToDFJSONParsing {
     println(inputFile)
     val conf = DaasUtil.getJobConf("JsonFileReadWrite", "local[2]", "1g", "1g");
     val sparkContext = new SparkContext(conf)
-    val sqlContext = new SQLContext(sparkContext)
+    val sqlContext = new HiveContext(sparkContext)
 
     val logger = LoggerFactory.getLogger("JSONFileReaderWriter")
     val mapper = new ObjectMapper
@@ -65,8 +67,18 @@ object RDDToDFJSONParsing {
     val jsonData=parseJsonData(records, mapper, errorRecords);
     val results=filterJsonDataByCity(jsonData, mapper, errorRecords)
     
+    println("Other work around to parse Whole Json file with Spark SQL")
+    
     val df=convertRDDToDF(records, mapper, errorRecords, sparkContext);
+    df.foreach { println }
+    import sqlContext._
     df.printSchema()
+    df.registerTempTable("asmath")
+    val personRecords = sqlContext.sql("select * from asmath")
+    personRecords.foreach { println }
+    
+    readJsonDataFromSqlContext(df,sqlContext);
+    readJsonDataFromHiveContext(df,sqlContext);
     
     // val jsonDataWithDF=convertRDDToDF
 
@@ -108,6 +120,7 @@ object RDDToDFJSONParsing {
   
   def convertRDDToDF(records:RDD[(String,String)],mapper:ObjectMapper,errorRecords:Accumulator[Int],sparkContext:SparkContext):DataFrame=
   {
+    
     val sqlContext = new SQLContext(sparkContext) 
     import sqlContext.implicits._
     var results = records.map { record =>
@@ -123,12 +136,26 @@ object RDDToDFJSONParsing {
     }
    
     results.foreach { println }.toString();
-    val input = sqlContext.jsonRDD(results.map { x => x.toString() })
+    val input = sqlContext.jsonRDD(results.map { x => x.toString().replaceAll("\n", "") })
     //results.foreach { println }.toString()
     return input;
     //input.printSchema()
   }
   
+  def readJsonDataFromSqlContext(df:DataFrame,sqlContext:SQLContext)={
+    import sqlContext.implicits._
+    println("Inside readJsonDataFromSqlContext")
+    df.registerTempTable("person")
+    val personRecords = sqlContext.sql("SELECT * FROM person LIMIT 10")
+    personRecords.foreach { println }
+  }
   
+  def readJsonDataFromHiveContext(df:DataFrame,sqlContext:SQLContext)={
+    import sqlContext.implicits._
+    println("Inside readJsonDataFromHiveContext")
+    df.registerTempTable("person")
+    val personRecords = sqlContext.sql("SELECT * FROM person LIMIT 10")
+    personRecords.foreach { println }
+  }
 
 }
