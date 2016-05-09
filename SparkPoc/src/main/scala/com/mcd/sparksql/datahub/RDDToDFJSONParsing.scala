@@ -73,9 +73,15 @@ object RDDToDFJSONParsing {
     df.foreach { println }
     import sqlContext._
     df.printSchema()
-    df.registerTempTable("asmath")
-    val personRecords = sqlContext.sql("select * from asmath")
+    df.select("first","last","address.city","address.line1","address.state","address.zip").show()
+    val outputData= df.select("first","last","address.city","address.line1","address.state","address.zip")
+    
+      
+    println("Register table didnt work so used alternative approach as above show methods")
+    df.registerTempTable("person")
+    val personRecords = sqlContext.sql("select * from person")
     personRecords.foreach { println }
+    
     
     readJsonDataFromSqlContext(df,sqlContext);
     readJsonDataFromHiveContext(df,sqlContext);
