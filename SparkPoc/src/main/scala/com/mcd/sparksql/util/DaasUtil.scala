@@ -18,6 +18,10 @@ object DaasUtil {
     new SparkConf().setAppName(jobName).setMaster(masters).set("spark.executor.memory", execMemory)
   }
   
+  def getJobConfForCassandra(jobName: String, masters: String, execMemory: String, driverMemory: String,cassandraHost:String): SparkConf ={
+    new SparkConf(true).set("spark.cassandra.connection.host", cassandraHost).setAppName(jobName).setMaster(masters).set("spark.executor.memory", execMemory).set("spark.driver.memory", driverMemory);
+  }
+  
   def getConfig(filePath: String):Map[String,String]= {
     Source.fromFile(filePath).getLines().filter(line => line.contains("=")).map{ line =>
       println("Values from property file --> "+line)

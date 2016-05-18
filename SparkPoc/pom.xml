@@ -92,6 +92,20 @@
 			<artifactId>spark-streaming-twitter_${scala.tools.version}</artifactId>
 			<version>${spark.version}</version>
 		</dependency>
+		
+		<!-- http://mvnrepository.com/artifact/com.datastax.spark/spark-cassandra-connector_2.11 -->
+			<dependency>
+			    <groupId>com.datastax.spark</groupId>
+			    <artifactId>spark-cassandra-connector_${scala.tools.version}</artifactId>
+			    <version>1.6.0-M2</version>
+			</dependency>
+			<dependency>
+			
+			<groupId>com.datastax.spark</groupId>
+			<artifactId>spark-cassandra-connector_${scala.tools.version}</artifactId>
+			<version>1.6.0-M2</version>
+		    </dependency>
+
 
 		<!-- I was having problems with 2.7 version of Jackson only 2.4.4 worked 
 			which is weird -->
@@ -137,7 +151,22 @@
   			<groupId>com.microsoft</groupId>
   			<artifactId>sqljdbc4</artifactId>  			
   			<version>3.0</version>
-		</dependency> 
+		</dependency>
+
+<!--
+		<dependency>
+			
+			<groupId>com.datastax.spark</groupId>
+			<artifactId>spark-cassandra-connector_2.10</artifactId>
+			<version>1.0.0-rc5</version>
+		</dependency>
+ 		<dependency>
+			
+			<groupId>com.datastax.spark</groupId>
+			<artifactId>spark-cassandra-connector-java_2.10</artifactId>
+			<version>1.0.0-rc5</version>
+		</dependency> -->
+			
 <!-- 
    	
    		   <dependency> <groupId>com.typesafe.scala-logging</groupId> <artifactId>scala-logging_${scala.tools.version}</artifactId> 
