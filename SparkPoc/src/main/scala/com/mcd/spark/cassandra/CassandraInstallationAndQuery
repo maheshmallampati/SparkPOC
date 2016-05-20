@@ -12,3 +12,4 @@ INSERT INTO example.greetings (user , id , greet , creation_date ) VALUES ('H014
 
 --------
 
+Follow windows installation and start cassandra and CQLSH manually.

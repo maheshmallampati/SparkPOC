@@ -13,7 +13,11 @@ object CassandraSQLToRdd01 {
   //INSERT INTO example.greetings (user , id , greet , creation_date ) VALUES ('H01474777', now(),'hello','2014-05-21 07:32:16');
 
   def main(args: Array[String]): Unit = {
-
+      //C:\Program Files\DataStax-DDC\apache-cassandra\bin>cassandra.bat
+      //C:\Program Files\DataStax-DDC\apache-cassandra\bin>cqlsh.bat
+      //C:\kafka\bin\windows> zookeeper-server-start.bat C:\kafka\config\zookeeper.properties//
+      //C:\kafka\bin\windows>kafka-server-start.bat C:\kafka\config\server.properties
+      // No need of prodcer and consumer as you are doing from scala applications. You can see output in eclipse console only for consumer.
     val conf = DaasUtil.getJobConfForCassandra("CassandraSparkJobs", "local[2]", "1g", "1g", "127.0.0.1");
 
     //val conf = new SparkConf(true).set("spark.cassandra.connection.host", "127.0.0.1").setAppName("CassandraCQL").setMaster("local[2]")  
