@@ -28,6 +28,7 @@ object KafkaProducer {
       val empId = Random.nextInt(1000);
       val empName = "Revanth-" + empId
       val msg = empId + "|" + empName + "|" + salary;
+      println("Sending message to Kafka Broker"+msg)
       producer.send(new KeyedMessage[String, String](topic, msg))
     }
   }
