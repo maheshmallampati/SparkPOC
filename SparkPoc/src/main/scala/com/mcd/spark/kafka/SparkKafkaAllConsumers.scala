@@ -142,6 +142,8 @@ object SparkKafkaAllConsumer
             println("Data is not yet recevied from the producer....")
           }
         })
+        
+        println("Run query and see if data is present..select * from spark_kafka_cassandra.employee;")
 }
    
    def saveKafkaConsumerMessagesToHdfs(messages:DStream[String],hdfsOrLocalURI:String) {
@@ -159,6 +161,7 @@ object SparkKafkaAllConsumer
             println("Data is not yet recevied from the producer....")
           }
         })
+        println("Check if data is present in folder Input/user/data")
 }
    
   
