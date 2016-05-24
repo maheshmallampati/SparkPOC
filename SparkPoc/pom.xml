@@ -40,6 +40,32 @@
 			<id>central2</id>
 			<url>http://central.maven.org/maven2/</url>
 		</repository>
+		
+		
+		<repository>
+			<id>scala-tools.org</id>
+			<name>Scala-tools Maven2 Repository</name>
+			<url>http://scala-tools.org/repo-releases</url>
+		</repository>
+
+		<repository>
+			<id>mapr-releases</id>
+			<url>http://repository.mapr.com/maven/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+		<repository>
+			<id>maven2-repository.dev.java.net</id>
+			<name>Java.net Repository for Maven</name>
+			<url>http://download.java.net/maven/2/</url>
+			<layout>default</layout>
+		</repository>
+		
+		
 	</repositories>
 	<dependencies>
 			<!-- http://wpcertification.blogspot.com/2015/12/how-to-create-spark-scala-fat-jar-with.html -->
@@ -106,7 +132,7 @@
 			<version>1.6.0-M2</version>
 		    </dependency>
 
-
+      
 		<!-- I was having problems with 2.7 version of Jackson only 2.4.4 worked 
 			which is weird -->
 

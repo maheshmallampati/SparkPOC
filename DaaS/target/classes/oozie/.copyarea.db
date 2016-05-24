@@ -1,8 +1,0 @@
-ClearCase CopyAreaDB|4
-GDW_Code\Source_Code\Java\DaaS\src\main\resources\oozie
-2
-4
-a:config.xml|1|153a558cc99|4bc|b3ec86ec|de13dec20965481b88753965dbdeca65|0
-e:job.properties|1|153a558cc7d|720|bf345555|9d8da1c9bf3a41f6aef65ffc6e578d2a|0
-13:daascoord-oozie.xml|1|153a558ccb2|536|7e8469f3|685b455e55844bb3936040f85037c0f2|0
-c:workflow.xml|1|153a558cccd|23a1|df6ba3da|8f1b5ef27e4b401899ab26103d9c8033|0
