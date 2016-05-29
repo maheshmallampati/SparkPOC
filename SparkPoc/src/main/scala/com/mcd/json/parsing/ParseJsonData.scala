@@ -58,7 +58,12 @@ object ParseJsonData {
     val output= args(1)  // Output/Json
     
     println(inputFile)
-    val conf = DaasUtil.getJobConf("JsonFileReadWrite", "local[2]", "1g", "1g");
+        val mapProps = DaasUtil.getConfig("Daas.properties")
+    val master=DaasUtil.getValue(mapProps, "Master")
+    val driverMemory=DaasUtil.getValue(mapProps, "Driver.Memory")
+    val executorMemory=DaasUtil.getValue(mapProps, "Executor.Memory")
+    val jobName="ParseJsonData"
+    val conf = DaasUtil.getJobConf(jobName, master, executorMemory, driverMemory);
     val sparkContext = new SparkContext(conf)
     val sqlContext = new SQLContext(sparkContext)
     

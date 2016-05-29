@@ -36,7 +36,12 @@ object StatelessFileSparkStream02 {
     }
     val logger = LoggerFactory.getLogger("NetworkSparkStream")
     
-    val conf = DaasUtil.getJobConf("SparkNetworkStream", "local[2]", "1g", "1g"); // ***** 2 cores should be at least given here for spark streaming to prevent from a starvation scenario.
+    val mapProps = DaasUtil.getConfig("Daas.properties")
+    val master=DaasUtil.getValue(mapProps, "Master")
+    val driverMemory=DaasUtil.getValue(mapProps, "Driver.Memory")
+    val executorMemory=DaasUtil.getValue(mapProps, "Executor.Memory")
+    val jobName="JDBCSparkPropsFile"
+    val conf = DaasUtil.getJobConf(jobName, master, executorMemory, driverMemory); // ***** 2 cores should be at least given here for spark streaming to prevent from a starvation scenario.
     //val sparkContext = new SparkContext(conf)
    // val sqlContext = new HiveContext(sparkContext)
     

@@ -27,7 +27,11 @@ object JDBCSparkPropsFile  extends Serializable{
     }
     //val mapProps = DaasUtil.getConfig("Daas.properties")
     val mapProps = DaasUtil.getConfig("Daas.properties")
-    val conf = DaasUtil.getJobConf("JsonFileReadWrite", "local[2]", "1g", "1g");
+    val master=DaasUtil.getValue(mapProps, "Master")
+    val driverMemory=DaasUtil.getValue(mapProps, "Driver.Memory")
+    val executorMemory=DaasUtil.getValue(mapProps, "Executor.Memory")
+    val jobName="PartitionExample"
+    val conf = DaasUtil.getJobConf(jobName, master, executorMemory, driverMemory);
     val sparkContext = new SparkContext(conf)
     //val sqlContext = new HiveContext(sparkContext)
     val logger = LoggerFactory.getLogger("JDBCSparkSqlWithPropertiesFile03")

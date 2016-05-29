@@ -69,13 +69,21 @@ object SparkKafkaAllConsumer
     }
      //%%%%%%%%%%%% STREAMING CONTEXTS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     try {
-      val conf = DaasUtil.getJobConfForCassandra("CassandraSparkJobs", "local[2]", "1g", "1g", "127.0.0.1");
+    val mapProps = DaasUtil.getConfig("Daas.properties")
+    val master=DaasUtil.getValue(mapProps, "Master")
+    val driverMemory=DaasUtil.getValue(mapProps, "Driver.Memory")
+    val executorMemory=DaasUtil.getValue(mapProps, "Executor.Memory")
+    val cassandraHost=DaasUtil.getValue(mapProps, "Cassandra.Host")
+    val jobName="JDBCSparkPropsFile"
+    val conf = DaasUtil.getJobConfForCassandra(jobName, master, executorMemory, driverMemory,cassandraHost);
+              
+      //val conf = DaasUtil.getJobConfForCassandra("CassandraSparkJobs", "local[2]", "1g", "1g", "127.0.0.1");
       val sparkContext = new SparkContext(conf)
       val sqlContext = new HiveContext(sparkContext)
       val ssc = new StreamingContext(sparkContext, Seconds(5)) 
 
       val logger = LoggerFactory.getLogger("JSONFileReaderWriter")
-      val cassandraHost="127.0.0.1";
+     // val cassandraHost="127.0.0.1";
       val hdfsOrLocalURI="Input"
 
       //%%%%%%%%%%%%% KAFKA BROKERS AND TOPICS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
