@@ -68,6 +68,10 @@
 		
 	</repositories>
 	<dependencies>
+	
+
+	
+	
 			<!-- http://wpcertification.blogspot.com/2015/12/how-to-create-spark-scala-fat-jar-with.html -->
 		    <dependency>
 			<groupId>org.apache.spark</groupId>
@@ -178,7 +182,12 @@
   			<artifactId>sqljdbc4</artifactId>  			
   			<version>3.0</version>
 		</dependency>
-
+	<!-- http://mvnrepository.com/artifact/com.typesafe.akka/akka-actor_2.11 -->
+<dependency>
+    <groupId>com.typesafe.akka</groupId>
+    <artifactId>akka-actor_2.11</artifactId>
+    <version>2.4.6</version>
+</dependency>
 <!--
 		<dependency>
 			
