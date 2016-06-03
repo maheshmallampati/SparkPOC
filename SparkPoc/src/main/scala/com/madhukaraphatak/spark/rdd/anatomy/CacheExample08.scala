@@ -1,5 +1,5 @@
 package com.madhukaraphatak.spark.rdd.anatomy
-
+ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.storage.RDDBlockId
 import org.apache.spark.{SparkContext, SparkEnv}
 import com.mcd.sparksql.util.DaasUtil
@@ -15,6 +15,8 @@ object CacheExample08{
       println("Please specify Input Path")
       System.exit(-1)
     }
+    
+
     val mapProps = DaasUtil.getConfig("Daas.properties")
     val master=DaasUtil.getValue(mapProps, "Master")
     val driverMemory=DaasUtil.getValue(mapProps, "Driver.Memory")
