@@ -122,6 +122,7 @@
 			<artifactId>spark-streaming-twitter_${scala.tools.version}</artifactId>
 			<version>${spark.version}</version>
 		</dependency>
+		
 		<!-- http://mvnrepository.com/artifact/org.apache.hbase/hbase -->
 <!-- <dependency>
     <groupId>org.apache.hbase</groupId>
