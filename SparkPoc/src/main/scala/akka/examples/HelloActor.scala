@@ -53,6 +53,7 @@ object HelloActor extends App {
   val helloActor = system.actorOf(Props[HelloActorWithoutConstructor], name = "helloactor") // Creating actor with System then it will become parent. You can create actos with multiple ways.
   val helloActorWithoutConstOtherWay = system.actorOf(Props(new HelloActorWithoutConstructor()), name = "helloActorWithoutConstOtherWay") // Creating actor with System then it will become parent. You can create actos with multiple ways.
   helloActor ! "hello"
+  helloActor ! "hello"
   helloActor ! "buenos dias"
   
 
