@@ -79,6 +79,7 @@ object RDDToDFJSONParsing {
       
     println("Register table didnt work so used alternative approach as above show methods")
     df.registerTempTable("person")
+    df.printSchema();
     val personRecords = sqlContext.sql("select * from person")
     personRecords.foreach { println }
     
