@@ -1,0 +1,11 @@
+see tuples and how they are accessed
+
+group by key is used when sorting and ranking
+
+don't use it when doing aggregations as it dont use combiner.
+
+----------------------------
+
+No handon in  this class
+
+------------

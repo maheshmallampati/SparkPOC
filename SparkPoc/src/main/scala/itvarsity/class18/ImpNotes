@@ -1,0 +1,21 @@
+--------------------- SORTING ---------------------------------------------
+
+
+sortbykey  --> to sort data based on key
+
+by default it is asscending order
+
+to get descending order, use sortbyKey(false)
+
+
+
+----------------------- RANKING -----------------------------------------------------------------------------
+
+general ranking by top(5) . gets top 5 recors based on the key
+
+
+----------------------  TAKEOrdered is equal to  sortbykey+ take functions together -------------------------------------
+
+takeOrdered
+
+

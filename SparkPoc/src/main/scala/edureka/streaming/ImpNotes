@@ -1,0 +1,13 @@
+always check API
+http://spark.apache.org/docs/latest/api/scala/index.html#package
+
+2. Socket use nc -lk 9999
+
+3. Go through slides of eudreka
+
+4. Rolling window.. Best example is last hour trending topic in twitter.
+
+5.
+-------------------
+
+
