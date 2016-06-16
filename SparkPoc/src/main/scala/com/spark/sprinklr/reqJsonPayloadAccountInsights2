@@ -1,0 +1,80 @@
+{
+	 "reportingEngine": "PLATFORM",
+	 "report": "ACCOUNT_INSIGHTS",
+	 "startTime": 328896854000,
+	 "endTime": 5404113599000,
+	 "page": 1,
+	 "pageSize": 1000,
+	 "filters": [
+	 ],
+	 "groupBys": [
+	   {
+	     "heading": "ACCOUNT_ID",
+	     "dimensionName": "ACCOUNT_ID",
+	     "groupType": "FIELD",
+	     "details": {
+	     }
+	   },
+	   {
+	     "heading": "date",
+	     "dimensionName": "date", 
+	     "groupType": "DATE_HISTOGRAM",
+	     "details": {	                                                               
+	     }
+	   },
+	   {
+	     "heading": "SocialNetwork",
+	     "dimensionName": "SN_TYPE", 
+	     "groupType": "FIELD",
+	     "details": {	                                                               
+	     }
+	   }
+	   
+	 ],
+	 "projections": [
+	 {
+	     "heading": "NET_LIKES",
+	     "measurementName": "NET_LIKES",
+	     "aggregateFunction": "SUM",
+	     "details": null
+	   },
+	    {
+	     "heading": "TWITTER_RETWEETS",
+	     "measurementName": "TWITTER_RETWEETS",
+	     "aggregateFunction": "SUM",
+	     "details": null
+	   },
+	   {
+	     "heading": "YOUTUBE_CHANNEL_VIEWS",
+	     "measurementName": "YOUTUBE_CHANNEL_VIEWS",
+	     "aggregateFunction": "SUM",
+	     "details": null
+	   },
+	   {
+	     "heading": "FACEBOOK_PAGE_FANS_ONLINE",
+	     "measurementName": "FACEBOOK_PAGE_FANS_ONLINE",
+	     "aggregateFunction": "SUM",
+	     "details": null
+	   },
+	   {
+	     "heading": "FACEBOOK_PAGE_FANS",
+	     "measurementName": "FACEBOOK_PAGE_FANS",
+	     "aggregateFunction": "SUM",
+	     "details": null
+	   },
+	   {
+	     "heading": "FACEBOOK_PAGE_VIEWS",
+	     "measurementName": "FACEBOOK_PAGE_VIEWS",
+	     "aggregateFunction": "SUM",
+	     "details": null
+	   },
+	   {
+	     "heading": "FACEBOOK_PAGE_IMPRESSIONS",
+	     "measurementName": "FACEBOOK_PAGE_IMPRESSIONS",
+	     "aggregateFunction": "SUM",
+	     "details": null
+	   }
+	 ],
+	 "projectionDecorations": [
+	 ]
+}
